@@ -7,10 +7,19 @@ let movieLists = {};
 
 
 async function loadMovies(searchTerm) {
-    const URL = `https://omdbapi.com/?s=${searchTerm}&page=1&apikey=fc1fef96`;
-    const res = await fetch(URL);
-    const data = await res.json();
-    if (data.Response === "True") displayMovieList(data.Search);
+    const URL = `http://www.omdbapi.com/?s=${searchTerm}&apikey=6f548d2`;
+    try {
+        const res = await fetch(URL);
+        const data = await res.json();
+        if (data.Response === "True") {
+            displayMovieList(data.Search);
+        } else {
+            searchList.innerHTML = "<p>No results found</p>";
+        }
+    } catch (error) {
+        console.error('Error fetching movies:', error);
+        searchList.innerHTML = "<p>Error fetching movies. Please try again later.</p>";
+    }
 }
 
 
@@ -32,7 +41,7 @@ function displayMovieList(movies) {
         movieListItem.dataset.id = movies[idx].imdbID;
         movieListItem.classList.add('search-list-item');
 
-        const moviePoster = movies[idx].Poster!== "N/A"? movies[idx].Poster : "image_not_found.png";
+        const moviePoster = movies[idx].Poster !== "N/A" ? movies[idx].Poster : "image_not_found.png";
 
         movieListItem.innerHTML = `
             <div class="search-item-thumbnail">
@@ -52,11 +61,12 @@ function displayMovieList(movies) {
 function addToMovieList(title, imdbID) {
     const listName = prompt("Enter list name:");
     const isPublic = confirm("Make this list public?");
-    if (listName &&!movieLists[listName]) {
-        movieLists[listName] = { privacy: isPublic? 'public' : 'private', movies: [{ title, imdbID }] };
-        displayMovieLists();
-    } else if (listName && movieLists[listName]) {
-        movieLists[listName].movies.push({ title, imdbID });
+    if (listName) {
+        if (!movieLists[listName]) {
+            movieLists[listName] = { privacy: isPublic ? 'public' : 'private', movies: [{ title, imdbID }] };
+        } else {
+            movieLists[listName].movies.push({ title, imdbID });
+        }
         displayMovieLists();
     }
 }
@@ -98,13 +108,18 @@ function displayMovieLists() {
 
 function logout() {
     alert('Logged out successfully!');
-    window.location.href = 'file:///C:/Users/91786/Downloads/search%20movie/movie-search/index.html'; // Replace 'sign_in.html' with your sign-in page URL
+    window.location.href = 'file:///C:/Users/91786/Downloads/search%20movie/movie-search/index.html'; // Replace with your actual sign-in page URL
 }
 
+
+movieSearchBox.addEventListener('input', findMovies);
+
+
 window.addEventListener('click', (event) => {
-    if (event.target.className!== "form-control") {
+    if (event.target.className !== "form-control") {
         searchList.classList.add('hide-search-list');
     }
 });
+
 
 displayMovieLists();
