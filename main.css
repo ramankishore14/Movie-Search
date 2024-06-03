@@ -1,7 +1,7 @@
-
+/* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-
+/* Color Variables */
 :root {
     --md-dark-color: #1d1d3f; /* Deep Blue */
     --dark-color: #2a2a4e; /* Dark Blue */
@@ -9,6 +9,7 @@
     --orange-color: #ff6f00; /* Vibrant Orange */
 }
 
+/* Global Styling */
 * {
     padding: 0;
     margin: 0;
@@ -28,7 +29,7 @@ img {
     display: block;
 }
 
-
+/* Wrapper Styling */
 .wrapper {
     min-height: 100vh;
     background-color: var(--dark-color);
@@ -40,7 +41,7 @@ img {
     padding: 0 1rem;
 }
 
-
+/* Logo Styling */
 .logo {
     padding: 1rem 0;
     border-bottom: 1px solid var(--light-dark-color);
@@ -56,7 +57,7 @@ img {
     color: var(--orange-color);
 }
 
-
+/* Search Container Styling */
 .search-container {
     position: relative;
     background-color: var(--md-dark-color);
@@ -131,7 +132,7 @@ img {
     opacity: 0.6;
 }
 
-
+/* Thumbnail Scrollbar Styling */
 .search-list::-webkit-scrollbar {
     width: 8px;
 }
@@ -145,7 +146,7 @@ img {
     border-radius: 10px;
 }
 
-
+/* Movie Result Styling */
 .result-container {
     padding: 3rem 0;
 }
@@ -162,6 +163,7 @@ img {
     padding-top: 3rem;
 }
 
+/* Movie Info Styling */
 .movie-title {
     font-size: 2rem;
     color: var(--orange-color);
@@ -224,7 +226,7 @@ img {
     margin: 1rem 0.7rem 0 0;
 }
 
-
+/* Responsive Styling */
 @media (max-width: 450px) {
     .logo p {
         font-size: 1.4rem;
